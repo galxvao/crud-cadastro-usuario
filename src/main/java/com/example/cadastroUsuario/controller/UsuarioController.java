@@ -5,11 +5,13 @@ import com.example.cadastroUsuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/crud")
 public class UsuarioController {
 
@@ -63,6 +65,8 @@ public class UsuarioController {
     }
 
 
+
+
     @GetMapping("/usuarios")
     public ResponseEntity<List<ListaUsuariosDto>> obterLista() {
 
@@ -80,7 +84,6 @@ public class UsuarioController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagem);
         }
-
 
     }
 }
