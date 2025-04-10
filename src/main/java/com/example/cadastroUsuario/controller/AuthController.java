@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class AuthController {
 
     @Autowired
@@ -24,6 +24,7 @@ public class AuthController {
     public String obterLogin(Model model){
 
         AutenticacaoDto autenticacaoDto = new AutenticacaoDto();
+      // autenticacaoDto.setLogin("davi@galvao.com");
         model.addAttribute("autenticacaoDto", autenticacaoDto);
 
         return "login";
@@ -34,6 +35,6 @@ public class AuthController {
 
         System.out.println(autenticacaoDto.getLogin() + " " + autenticacaoDto.getSenha());
 
-        return "login";
+        return "redirect:/login";
     }
 }
