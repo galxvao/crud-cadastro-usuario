@@ -18,13 +18,10 @@ public class AuthController {
     @Autowired
     UsuarioService service;
 
-
-
     @GetMapping
     public String obterLogin(Model model){
 
         AutenticacaoDto autenticacaoDto = new AutenticacaoDto();
-      // autenticacaoDto.setLogin("davi@galvao.com");
         model.addAttribute("autenticacaoDto", autenticacaoDto);
 
         return "login";
@@ -35,6 +32,12 @@ public class AuthController {
 
         System.out.println(autenticacaoDto.getLogin() + " " + autenticacaoDto.getSenha());
 
-        return "redirect:/login";
+        return "redirect:/home";
     }
+
+
+
+
+
+
 }
