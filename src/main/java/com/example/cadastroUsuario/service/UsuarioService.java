@@ -100,24 +100,25 @@ public class UsuarioService {
     }
 
 
-    public List<ListaUsuariosDto> listarUsuarios() {
+    public List<ConsultaUsuarioDto> listarUsuarios() {
 
-        List<ListaUsuariosDto> listaUsuariosDtos = new ArrayList<>();
+        List<ConsultaUsuarioDto> listaUsuariosDtos = new ArrayList<>();
 
         List<UsuarioModel> listaUsuarioModel = repository.findAll();
 
         for (UsuarioModel usuarioModel : listaUsuarioModel) {
 
-            ListaUsuariosDto usuario = new ListaUsuariosDto();
+            ConsultaUsuarioDto usuario = new ConsultaUsuarioDto();
 
             usuario.setId(usuarioModel.getId());
             usuario.setNome(usuarioModel.getNome());
             usuario.setLogin(usuarioModel.getLogin());
 
+
             listaUsuariosDtos.add(usuario);
         }
+            return listaUsuariosDtos;
 
-        return listaUsuariosDtos;
     }
 
     public MensagemDto removerUsuario(Long id) {

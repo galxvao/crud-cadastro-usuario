@@ -1,6 +1,7 @@
 package com.example.cadastroUsuario.controller;
 
 import com.example.cadastroUsuario.dto.AutenticacaoDto;
+import com.example.cadastroUsuario.dto.MensagemDto;
 import com.example.cadastroUsuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,12 @@ public class AuthController {
 
         System.out.println(autenticacaoDto.getLogin() + " " + autenticacaoDto.getSenha());
 
-        return "redirect:/home";
+        MensagemDto mensagemDto = new MensagemDto();
+
+        if(mensagemDto.isSucesso()) {
+            return "redirect:/home?sucesso";
+        }
+        return "redirect:/login?erro";
     }
 
 

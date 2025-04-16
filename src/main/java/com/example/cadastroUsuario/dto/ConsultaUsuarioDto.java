@@ -1,12 +1,15 @@
 package com.example.cadastroUsuario.dto;
 
-public class ListaUsuariosDto {
+
+
+
+public class ConsultaUsuarioDto {
 
     private Long id;
     private String nome;
     private String login;
 
-    public ListaUsuariosDto() {
+    public ConsultaUsuarioDto() {
     }
 
     public Long getId() {
