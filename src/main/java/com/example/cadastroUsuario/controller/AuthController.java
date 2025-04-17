@@ -33,7 +33,7 @@ public class AuthController {
 
         System.out.println(autenticacaoDto.getLogin() + " " + autenticacaoDto.getSenha());
 
-        MensagemDto mensagemDto = new MensagemDto();
+        MensagemDto mensagemDto = service.autenticarUsuario2(autenticacaoDto);
 
         if(mensagemDto.isSucesso()) {
             return "redirect:/home?sucesso";

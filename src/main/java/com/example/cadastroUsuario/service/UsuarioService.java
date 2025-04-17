@@ -1,5 +1,6 @@
 package com.example.cadastroUsuario.service;
 
+import com.example.cadastroUsuario.controller.AuthController;
 import com.example.cadastroUsuario.dto.*;
 import com.example.cadastroUsuario.model.UsuarioModel;
 import com.example.cadastroUsuario.repositories.UsuarioRepository;
@@ -21,8 +22,14 @@ public class UsuarioService {
 
         MensagemDto mensagem = new MensagemDto();
 
-        UsuarioModel usuario = new UsuarioModel();
+        Optional<UsuarioModel> usuarioModel = repository.findByLogin(usuarioDto.getLogin());
+        if(usuarioModel.isPresent()){
+            mensagem.setMensagem("[ERRO] ao cadastrar usuário");
+            mensagem.setSucesso(false);
+            return mensagem;
+        }
 
+        UsuarioModel usuario = new UsuarioModel();
 
         usuario.setNome(usuarioDto.getNome());
         usuario.setLogin(usuarioDto.getLogin());
@@ -147,5 +154,43 @@ public class UsuarioService {
         return mensagem;
     }
 
+    public MensagemDto autenticarUsuario2(AutenticacaoDto dados){
+        MensagemDto mensagem = new MensagemDto();
 
+        Optional<UsuarioModel> usuarioOptional = repository.findByLogin(dados.getLogin());
+
+        if(usuarioOptional.isPresent()){
+            if(dados.getSenha().equals(usuarioOptional.get().getSenha())){
+                mensagem.setMensagem("Usuário autenticado com sucesso!");
+                mensagem.setSucesso(true);
+                return mensagem;
+            }
+        }
+
+        mensagem.setMensagem("[ERRO] Login ou senha incorreto!");
+        mensagem.setSucesso(false);
+        return mensagem;
+    }
+    public UsuarioAtualizarDto atualizarUsuarioPorId(Long id){
+
+        UsuarioAtualizarDto usuarioAtualizarDto = new UsuarioAtualizarDto();
+
+        Optional<UsuarioModel> buscarUsuario = repository.findById(id);
+        UsuarioModel usuarioModel = new UsuarioModel();
+        if(buscarUsuario.isPresent()){
+
+            usuarioAtualizarDto.setId(buscarUsuario.get().getId());
+            usuarioAtualizarDto.setNome(buscarUsuario.get().getNome());
+            usuarioAtualizarDto.setLogin(buscarUsuario.get().getLogin());
+            usuarioAtualizarDto.setSenha(buscarUsuario.get().getSenha());
+
+            return usuarioAtualizarDto;
+        }
+
+        return null;
+
+    }
 }
+
+
+
